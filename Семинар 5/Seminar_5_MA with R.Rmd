@@ -1,0 +1,57 @@
+---
+title: "Семинар 5. Исследование свойств стационарных процессов: MA-процессы"
+author: "Достовалов М.Ю."
+date: "22.02.2024"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    df_print: paged
+lang: ru-russian
+---
+
+1. Анализ свойств МА-процессов (по сгенерированным данным).
+
+Установим необходимые пакеты и подгрузим библиотеки
+```{r message=FALSE, warning=FALSE}
+library(haven)
+library(stats)
+```
+Задание 1. Анализ свойств МА-процессов в R. Файл: МА.dta.
+
+Загрузим данные из файла
+```{r}
+# file.choose()
+MA=read_dta("MA.dta") # укажите свой путь, где лежит файл
+```
+
+Построим график исходного временного ряда и автокорреляционной функции для процесса у1
+```{r}
+plot.ts(MA$y1, xlab="t")
+acf(MA$y1, na.action = na.pass, plot=TRUE, ci.type = "ma")
+```
+
+Построим график исходного временного ряда и автокорреляционной функции для процесса у2
+```{r}
+plot.ts(MA$y2, xlab="t")
+acf(MA$y2, na.action = na.pass, plot=TRUE, ci.type = "ma")
+```
+
+Построим график исходного временного ряда и автокорреляционной функции для процесса у3
+```{r}
+plot.ts(MA$y3, xlab="t")
+acf(MA$y3, na.action = na.pass, plot=TRUE, ci.type = "ma")
+```
+
+Построим график исходного временного ряда и автокорреляционной функции для процесса у4
+```{r}
+plot.ts(MA$y4, xlab="t")
+acf(MA$y4, na.action = na.pass, plot=TRUE, ci.type = "ma")
+```
+
+Построим график исходного временного ряда и автокорреляционной функции для процесса у5
+```{r}
+plot.ts(MA$y5, xlab="t")
+acf(MA$y5, na.action = na.pass, plot=TRUE, ci.type = "ma")
+```
+

@@ -1,0 +1,181 @@
+---
+title: "Семинар 3. Анализ неслучайной составляющей временного ряда"
+author: "Достовалов М.Ю."
+date: "08.02.2024"
+output:
+  word_document: default
+  pdf_document:
+    df_print: paged
+  html_document:
+    df_print: paged
+lang: "ru-russian"
+---
+
+1.  Проверка гипотезы о неизменности среднего значения ВР (критерий серий, основанный на медиане выборки).
+
+Установим необходимые пакеты и подгрузим библиотеки
+
+```{r message=FALSE, warning=FALSE}
+# install.packages("DescTools")
+# install.packages("TTR")
+
+library(stats)
+library(TTR)
+library(DescTools)
+library(haven)
+```
+
+Задание 1. Изучается динамика цен на золото. Файл gold.dta.
+
+Загрузим данные из файла
+
+```{r}
+#file.choose()
+gold=read_dta("gold.dta") # укажите свой путь, где лежит файл
+```
+
+Построим график временного ряда
+
+```{r}
+plot.ts(gold$gold,
+     main="Цена золота",
+     ylab="тыс.руб./грамм", 
+     xlab="t")
+```
+
+Посмотрим на характеристики ВР. Найдем медиану.
+
+```{r}
+summary(gold$gold)
+paste('Медиана: Me = ', round(median(gold$gold), 2))
+```
+
+Добавим на график линию медианы ВР
+
+```{r}
+plot.ts(gold$gold,
+     main="Динамика цен на золото",
+     ylab="тыс.руб./грамм", 
+     xlab="t")
+abline(h=median(gold$gold))
+```
+
+Строим серии для критерия серий
+
+```{r}
+gold$runs=ifelse(gold$gold<= 2.43, 0, 1)
+gold$runs
+```
+
+Приближенное правило: При отсутствии трендовой составляющей число серий должно быть достаточно велико, серии не должны быть слишком длинными.
+
+```{r}
+trunc(1/2*(23+2-1.96*sqrt(23-1)))
+trunc(1.43*log(23+1))
+```
+
+Число серий должно быть r\>7 и длина серий должна быть tau\<4. Для нашего примера мы получили r=6, tau=11. Какой вывод можно сделать?
+
+Проведем тест на случайность ВР (Н0: временной ряд имеет случайные наблюдения, тренд отсутствует)
+
+```{r}
+RunsTest(gold$gold)
+```
+
+Задание 2. Критерий случайности для БШ и тренда
+
+Построим график БШ и проверим процесс на случайность.
+
+```{r}
+runtest=read_dta("runtest.dta")
+plot.ts(runtest$wn)
+abline(h=median(runtest$wn))
+summary(runtest$wn)
+RunsTest(runtest$wn)
+```
+
+Построим график тренда и проверим процесс на случайность.
+
+```{r}
+plot.ts(runtest$tr1)
+abline(h=median(runtest$tr1))
+summary(runtest$tr1)
+RunsTest(runtest$tr1)
+```
+
+2.  Выделение трендовой составляющей. Скользящие средние.
+
+SMA -Simple moving average.
+
+EMA - Exponential moving average.
+
+WMA - Weighted moving average.
+
+Задание 3. Выделить трендовую компоненту в ценах на золото.
+
+Найдем 3-членную скользящую среднюю.
+
+```{r}
+sma3 = SMA(gold$gold,n=3)
+sma3
+```
+
+Найдем 5-членную скользящую среднюю.
+
+```{r}
+sma5 = SMA(gold$gold,n=5)
+sma5
+```
+
+Создадим новую таблицу со сглаженными значениями ВР
+
+```{r}
+data_ma= data.frame(gold$gold, sma3, sma5)
+View(data_ma)
+```
+
+Построим графики исходного и сглаженных временных рядов
+
+```{r}
+plot(gold$gold, col="blue", main="Динамика цен на золото", ylab="тыс.руб./грамм", 
+     xlab="t", type="b", pch=21, cex=0.5)
+lines(sma3, col="red", lwd=2, type = "b", pch = 12, cex=0.5)
+lines(sma5, col="green3", lwd=2, type = "b", pch = 12, cex=0.5)
+```
+
+Задание 4. Для показателя числа браков постройте простую СС с длиной интервала сглаживания k=12 (файл marit.dta)
+
+Загрузим данные из файла и построим график ВР
+
+```{r}
+marit=read_dta("marit.dta")
+mar <- ts(marit$mar, start=c(2006,1), frequency=12) 
+plot(mar)
+```
+
+Рассчитаем 12-членную скользящую среднюю и построим графики
+
+```{r}
+wgts=c( 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5)/12
+wgts1 = c(.5, rep(1,11), .5)/12   # rep(1,11) повторить "1" 11 раз
+yma=stats::filter(mar, sides=2, filter=wgts) #sides=2 включать наблюдения до и после точки сглаживания 
+plot(mar, main = "Число браков")
+lines(yma,lwd=2, col=4)
+```
+
+ACF/PACF числа браков
+
+```{r}
+acf(mar,40, ylab="ACF(mar)")
+acf(yma, 40, na.action = na.pass, ylab="ACF(yma)")
+```
+
+Проведем тест на случайность (отсутствие тренда)
+
+```{r}
+RunsTest(mar)
+RunsTest(yma, na.rm = TRUE) # na.rm = TRUE -удаляем пропуски при выполнении теста
+
+```
+
+Математические функции в R: <http://www.itmathrepetitor.ru/matematicheskie-funkcii-v-r/>

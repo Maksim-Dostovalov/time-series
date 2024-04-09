@@ -1,0 +1,2033 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Семинар 2. Автокорреляционные функции процессов},
+  pdfauthor={Достовалов М.Ю.},
+  pdflang={ru-russian},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Семинар 2. Автокорреляционные функции процессов}
+\author{Достовалов М.Ю.}
+\date{25.01.2024}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Автокорреляционные функции ACF/PACF процессов.
+\end{enumerate}
+
+Подгрузим необходимые библиотеки для работы
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(haven)}
+\end{Highlighting}
+\end{Shaded}
+
+Загрузим данные из файла
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#file.choose()}
+\NormalTok{S2}\OtherTok{=}\FunctionTok{read\_dta}\NormalTok{(}\StringTok{"S2.dta"}\NormalTok{) }\CommentTok{\# укажите свой путь, где лежит файл}
+\end{Highlighting}
+\end{Shaded}
+
+Задание 1. Для белого шума вычислите в R значения автокорреляции 1-го,
+2-го, 3-го и 4-го порядка и постройте карролелограмму
+
+ACF для белого шума
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{wn, }\AttributeTok{lag.max=}\DecValTok{4}\NormalTok{, }\AttributeTok{plot=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Autocorrelations of series 'S2$wn', by lag
+## 
+##      0      1      2      3      4 
+##  1.000  0.115 -0.052 -0.148 -0.067
+\end{verbatim}
+
+График ACF для белого шума
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{wn, }\DecValTok{10}\NormalTok{, }\AttributeTok{main=}\StringTok{"Белый шум"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"ACF(wn)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <91>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <bb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <8b>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <88>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <83>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <bc>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+PACF для белого шума
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pacf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{wn, }\AttributeTok{lag.max=}\DecValTok{4}\NormalTok{, }\AttributeTok{plot=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Partial autocorrelations of series 'S2$wn', by lag
+## 
+##      1      2      3      4 
+##  0.115 -0.066 -0.137 -0.038
+\end{verbatim}
+
+График PACF для белого шума
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pacf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{wn, }\DecValTok{10}\NormalTok{, }\AttributeTok{main=}\StringTok{"Белый шум"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"PACF(wn)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <91>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <bb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <8b>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <88>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <83>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Белый шум' в 'mbcsToSbcs': точка заменена на <bc>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+Задание 2. Проведите тест Льюинга-Бокса на наличие автокорреляции. В
+дальнейшем будет использоваться для анализа остатков.
+
+Проверим нулевую гипотезу Н0: ρ1=\ldots= ρk=0 («автокорреляция до лага k
+отсутствует»)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Box.test}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{wn, }\AttributeTok{lag=}\DecValTok{10}\NormalTok{) }\CommentTok{\# Тест Бокса{-}Пирса}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Box-Pierce test
+## 
+## data:  S2$wn
+## X-squared = 10.913, df = 10, p-value = 0.3643
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Box.test}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{wn,}\AttributeTok{lag=}\DecValTok{10}\NormalTok{, }\AttributeTok{type=}\StringTok{"Ljung"}\NormalTok{) }\CommentTok{\# Тест Льюинга{-}Бокса дает более качественные результаты, т.к. ближе к ХИ\^{}2{-}распределению}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Box-Ljung test
+## 
+## data:  S2$wn
+## X-squared = 11.229, df = 10, p-value = 0.3399
+\end{verbatim}
+
+Задание 3. Вычислите ACF и PACF для всех процессов, используя встроенные
+процедуры. Как ведут себя графики ACF и PACF для рассмотренных выше
+стационарных и нестационарных процессов? Сделайте вывод.
+
+ACF/PACF для линейного тренда
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{tr1, }\DecValTok{10}\NormalTok{, }\AttributeTok{main=}\StringTok{"Линейный тренд"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"ACF(tr1)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <9b>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <8b>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b4>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pacf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{tr1, }\DecValTok{10}\NormalTok{, }\AttributeTok{main=}\StringTok{"Линейный тренд"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"PACF(tr1)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <9b>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <8b>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Линейный тренд' в 'mbcsToSbcs': точка заменена на <b4>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-8-2.pdf}
+
+ACF/PACF для параболического тренда
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{tr2, }\DecValTok{10}\NormalTok{, }\AttributeTok{main=}\StringTok{"Параболический тренд"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"ACF(tr2)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <9f>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <be>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <bb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <87>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <81>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <ba>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b4>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pacf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{tr2, }\DecValTok{10}\NormalTok{, }\AttributeTok{main=}\StringTok{"Параболический тренд"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"PACF(tr2)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <9f>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <be>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <bb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <87>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <81>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <ba>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <82>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Параболический тренд' в 'mbcsToSbcs': точка заменена на
+## <b4>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+ACF/PACF для случайного блуждания
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{rw, }\DecValTok{10}\NormalTok{, }\AttributeTok{main=}\StringTok{"Случайное блуждание"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"ACF(rw)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <a1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <bb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <83>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <87>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <be>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <bb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <83>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pacf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{rw, }\DecValTok{10}\NormalTok{, }\AttributeTok{main=}\StringTok{"Случайное блуждание"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"PACF(rw)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <a1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <bb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <83>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <87>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <be>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <bb>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <83>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <bd>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Случайное блуждание' в 'mbcsToSbcs': точка заменена на <b5>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-10-2.pdf}
+
+ACF/PACF для случайный процесс с периодической составляющей Yt
+=3cos(2πt/20)+ εt
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{cos, }\DecValTok{25}\NormalTok{, }\AttributeTok{main=}\StringTok{"Периодический процесс"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"ACF(cos)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <9f>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <be>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <87>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <81>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <ba>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <bf>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <be>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <86>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <81>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <81>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pacf}\NormalTok{(S2}\SpecialCharTok{$}\NormalTok{cos, }\DecValTok{25}\NormalTok{, }\AttributeTok{main=}\StringTok{"Периодический процесс"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"PACF(cos)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <9f>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <be>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b4>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <87>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <81>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <ba>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b8>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b9>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <bf>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <be>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <86>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d0>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <b5>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <81>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <d1>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in title(main %||% if (i == j) snames[i] else paste(sn.abbr[i], :
+## ошибка конвертации 'Периодический процесс' в 'mbcsToSbcs': точка заменена на
+## <81>
+\end{verbatim}
+
+\includegraphics{Seminar_2_Autocorrelation-with-R_files/figure-latex/unnamed-chunk-11-2.pdf}
+
+\end{document}

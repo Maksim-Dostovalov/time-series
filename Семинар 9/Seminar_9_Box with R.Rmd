@@ -1,0 +1,186 @@
+---
+title: "Методология Бокса-Дженкинса"
+author: "Достовалов М.Ю."
+date: "21.03.2024"
+output:
+  word_document: default
+  pdf_document:
+    df_print: paged
+  html_document:
+    df_print: paged
+lang: "ru-russian"
+---
+
+Установим необходимые пакеты и подгрузим библиотеки
+
+```{r message=FALSE, warning=FALSE}
+# install.packages('urca')
+# install.packages('aTSA')
+# install.packages('openxlsx')
+# install.packages('forecast')
+# install.packages('zoo')
+# install.packages('xts')
+# install.packages('pander')
+# install.packages('car')
+
+library(openxlsx)
+library(aTSA)
+library(urca)
+library(haven)
+library(stats)
+library(tseries)
+library(forecast)
+library(zoo) # временные ряды
+library(xts) # временные ряды
+library(pander) # красивые таблицы
+library(lmtest) # тесты
+library(car) # тесты
+library(ggplot2)
+```
+
+Задание 2.2. Анализ младенческой смертности. Файл: Mortality.xlsx Данные: Младенческая смертность в России за период 1960-2017 гг.
+
+Загрузим данные из файла
+
+```{r}
+#file.choose()
+df <- read.xlsx('Mortality.xlsx') # укажите свой путь, где лежит файл
+```
+
+\*\*\* Методология Бокса-Дженкинса \*\*\*
+
+Этап 1. Идентификация модели
+
+Графический анализ ВР
+
+```{r}
+tsdisplay(df$Russia)
+```
+
+Тест Дики-Фуллера для исходного ряда
+
+```{r}
+summary(ur.df(df$Russia, type = c("trend"), lags = 0))
+summary(ur.df(df$Russia, type = c("drift"), lags = 0))
+```
+
+Вывод: После добавления тренда процесс на уровне значимости 5% становится стационарным. Значит можно предположить, что это тренд-стационарный процесс
+
+Тест Дики-Фуллера для первой разности
+
+```{r}
+d_Russia = diff(df$Russia)
+summary(ur.df(d_Russia, type = c("drift"), lags = 0))
+```
+
+Вывод: После взятия первой разности процесс стал стационарным. Значит это разностно-стационарный процесс с порядком интегрируемости I(1)
+
+Этап 2. Оценивание моделей
+
+ARIMA(1,1,0)
+
+```{r}
+m1 <- Arima(df$Russia, order=c(1,1,0))
+#m1 <- Arima(df$Russia, order=c(1,1,0), include.constant=TRUE) # модель с константой
+summary(m1)
+```
+
+ARIMA(0,1,1)
+
+```{r}
+m2 <- Arima(df$Russia, order=c(0,1,1))
+summary(m2)
+```
+
+ARIMA(1,1,1)
+
+```{r}
+m3 <- Arima(df$Russia, order=c(1,1,1))
+summary(m3)
+```
+
+ARIMA(1,0,0)+линейный тренд
+
+```{r}
+#m4 <- Arima(df$Russia, order=c(1,1,0), xreg=df$t)
+m4 <- Arima(df$Russia, order=c(1,1,0), include.drift=TRUE)
+summary(m4)
+```
+
+ARIMA(2,1,1)
+
+```{r}
+m5 <- Arima(df$Russia, order=c(2,1,1))
+summary(m5)
+```
+
+Этап 3. Диагностика моделей
+
+ARIMA(1,1,0)
+
+```{r}
+e1 <- m1$residuals
+tsdisplay(e1)
+pander(shapiro.test(e1)) # Тест Шапиро-Уилка на нормальность остатков (Н0: нормальное распределение)
+pander(Box.test(e1,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию (Н0: автокорреляции нет)
+```
+
+ARIMA(0,1,1)
+
+```{r}
+e2 <- m2$residuals
+tsdisplay(e2)
+pander(shapiro.test(e2)) # Тест Шапиро-Уилка на нормальность остатков (Н0: нормальное распределение)
+pander(Box.test(e2,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию (Н0: автокорреляции нет)
+```
+
+ARIMA(1,1,1)
+
+```{r}
+e3 <- m3$residuals
+tsdisplay(e3)
+pander(shapiro.test(e3)) # Тест Шапиро-Уилка на нормальность остатков (Н0: нормальное распределение)
+pander(Box.test(e3,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию (Н0: автокорреляции нет)
+```
+
+ARIMA(1,0,0)+линейный тренд
+
+```{r}
+e4 <- m4$residuals
+tsdisplay(e4)
+pander(shapiro.test(e4)) # Тест Шапиро-Уилка на нормальность остатков (Н0: нормальное распределение)
+pander(Box.test(e4,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию (Н0: автокорреляции нет)
+```
+
+ARIMA(2,1,1)
+
+```{r}
+e5 <- m5$residuals
+tsdisplay(e5)
+pander(shapiro.test(e5)) # Тест Шапиро-Уилка на нормальность остатков (Н0: нормальное распределение)
+pander(Box.test(e5,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию (Н0: автокорреляции нет)
+```
+
+Этап 4. Прогнозирование по модели
+
+ARIMA(1,1,0)
+
+```{r}
+pred1=fitted(m1)
+ggplot(data=df, aes(Year, Russia))+
+  geom_line(colour = 'blue')+
+  geom_line(aes(Year, pred1), colour = 'red', size = 0.5)
+
+prognoz1 <- forecast(m1, h=6)
+prognoz1
+plot(prognoz1)
+```
+
+ARIMA(1,0,0)+линейный тренд
+
+```{r}
+pred4=fitted(m4)
+ggplot(data=df, aes(Year, Russia))+
+  geom_line(colour = 'blue')+
+  geom_line(aes(Year, pred4), colour = 'red', size = 0.5)
+```

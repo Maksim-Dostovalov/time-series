@@ -1,0 +1,337 @@
+---
+title: "Семинар 4. Анализ трендовой компоненты временного ряда. Тест Чоу"
+author: "Достовалов М.Ю."
+date: "08.02.2024"
+output:
+  word_document: default
+  pdf_document:
+    df_print: paged
+  html_document:
+    df_print: paged
+lang: "ru-russian"
+---
+
+1.  Анализ и моделирование трендовой компоненты. Типы кривых роста.
+
+Установим необходимые пакеты и подгрузим библиотеки
+
+```{r message=FALSE, warning=FALSE}
+# install.packages("forecast")
+# install.packages("dplyr")
+# install.packages("fBasics")
+# install.packages("broom")
+# install.packages("strucchange") # пакет для анализа структурных сдвигов
+
+library(strucchange)
+library(fBasics)
+library(ggplot2)
+library(dplyr)
+library(forecast)
+library(haven)
+```
+
+Задание 1. Постройте графики распространенности анемии среди детей. Опишите существующие тренды. Какие кривые роста (функции от времени) подходят для описания такого типа трендов? Файл hunger.dta.
+
+Загрузим данные из файла
+
+```{r}
+#file.choose()
+hunger=read_dta("hunger.dta") # укажите свой путь, где лежит файл
+```
+
+Создадим ts объект для отражения динамики анемии в Западной Африке
+
+```{r}
+West <- ts(hunger$West, start=1990)
+West
+```
+
+Построим график динамики детской анемии в Западной Африке
+
+```{r}
+plot.ts(West,
+     main="Prevalence of anemia among children in West Africa (1990-2011)",
+     ylab="%", 
+     xlab="Year")
+```
+
+Оценим кривые роста и проверим модели на адекватность
+
+1.Построим линейный тренд и оценим адекватность модели
+
+```{r}
+hunger<-hunger%>% mutate(t = 1:22)
+hunger<-hunger%>% mutate(t2=t^2)
+model1=lm(West~t, data=hunger)
+summary(model1)
+anova(model1)
+```
+
+Добавим на график линию тренда
+
+```{r}
+ggplot(hunger, aes(x=Year, y=West)) +
+  geom_line()+
+    stat_smooth(method = "lm")+
+  theme_bw()
+```
+
+Посчитаем информационные критерии Акайке(AIC) и Шварца(BIC)
+
+```{r}
+CV(model1) #Cross-validation statistic
+```
+
+Проведем анализ остатков для модели линейного тренда
+
+Проверим автокорреляцию остатков (ACF, PACF, Тест Льюинга-Бокса)
+
+```{r}
+west1=fitted(model1)
+e1=residuals(model1)
+acf(e1)
+pacf(e1)
+Box.test(residuals(model1),lag=10, type="Lj") # Тест Льюинга-Бокса:  Н0: ρ1=…= ρk=0 («автокорреляция до лага k отсутствует»)
+```
+
+Проведем тесты на нормальность остатков (Н0: наблюдения имеют нормальное распределение)
+
+```{r}
+jarqueberaTest(model1$resid) # Тест Жака-Бера
+shapiro.test(model1$resid) # Шапиро-Уилка
+```
+
+2.Построим параболический тренд и оценим адекватность модели
+
+```{r}
+model2=lm(West~t+t2, data=hunger)
+summary(model2)
+anova(model2)
+```
+
+Добавим на график линии тренда
+
+```{r}
+west2=fitted(model2)
+ggplot(hunger) +
+  geom_line(aes(Year, West), colour = 'grey', size = 2) +
+  geom_line(aes(Year, west2), colour = 'red', size = 1)+
+  geom_line(aes(Year, west1), colour = 'blue', size = 1)
+```
+
+Посчитаем информационные критерии Акайке(AIC) и Шварца(BIC)
+
+```{r}
+CV(model2) #Cross-validation statistic
+```
+
+Проведем анализ остатков для модели линейного тренда
+
+Проверим автокорреляцию остатков (ACF, PACF, Тест Льюинга-Бокса)
+
+```{r}
+e2=residuals(model2)
+acf(e2)
+pacf(e2)
+Box.test(residuals(model2),lag=10, type="Lj") # Тест Льюинга-Бокса:  Н0: ρ1=…= ρk=0 («автокорреляция до лага k отсутствует»)
+```
+
+Проведем тесты на нормальность остатков (Н0: наблюдения имеют нормальное распределение)
+
+```{r}
+jarqueberaTest(model2$resid) # Тест Жака-Бера
+shapiro.test(model2$resid) # Шапиро-Уилка
+```
+
+2.  Тест Чоу на структурный сдвиг.
+
+Задание 2. Для ВР со структурными изменениями из файла Chow.dta: tr, tr1, tr2, tr3, (предварительно изучив данные и определив точку структурного сдвига) используйте тест Чоу. Сделайте вывод.
+
+Загружаем данные (chow.dta).
+
+```{r}
+chow=read_dta("chow.dta")
+```
+
+Графики ВР
+
+```{r}
+ggplot(chow, aes(x=t, y=wn)) +  geom_line()
+ggplot(chow, aes(x=t, y=tr)) +  geom_line()
+ggplot(chow, aes(x=t, y=tr1)) +  geom_line()
+ggplot(chow, aes(x=t, y=tr2)) +  geom_line()
+ggplot(chow, aes(x=t, y=tr3)) +  geom_line()
+ggplot(chow, aes(x=t, y=tr4)) +  geom_line()
+```
+
+Проведем тест Чоу на структурный сдвиг для БШ (H0: структурного сдвига нет)
+
+```{r}
+sctest(chow$wn~chow$t, type="Chow")
+```
+
+График tr
+
+```{r}
+ggplot(chow, aes(x=t, y=tr)) +  geom_line()
+```
+
+Проведем тест Чоу на структурный сдвиг для tr в точке t=20
+
+```{r}
+sctest(chow$tr~chow$t, type="Chow", point=20) # Тест Чоу: point=20 - точка сдвига
+fs.tr <- Fstats(chow$tr~chow$t)
+plot(fs.tr) 
+```
+
+График tr1
+
+```{r}
+tr1 <- ts(chow$tr1, start=1)
+t <- 1:100
+ggplot(chow, aes(x=t, y=tr1)) +  geom_line()
+fs.tr1 <- Fstats(chow$tr1~chow$t)
+plot(fs.tr1) 
+```
+
+Рассчитаем точку сдвига на основе теста Бай-Перрона
+
+```{r}
+breakpoints(fs.tr1) 
+```
+
+Проведем тест Чоу на структурный сдвиг для tr1 в точке t=30
+
+```{r}
+sctest(chow$tr1~chow$t, type="Chow", point=30) # Тест Чоу: point=30 - точка сдвига
+```
+
+График tr2
+
+```{r}
+ggplot(chow, aes(x=t, y=tr2)) +  geom_line()
+```
+
+Проведем анализ структурных сдвигов для tr2
+
+```{r}
+bp.tr2 <- breakpoints(chow$tr2~chow$t)
+breakpoints(bp.tr2)
+sctest(chow$tr2~chow$t, type="Chow", point=60)
+fs.tr2 <- Fstats(chow$tr2~chow$t)
+plot(fs.tr2) 
+```
+
+График tr3
+
+```{r}
+ggplot(chow, aes(x=t, y=tr3)) +  geom_line()
+```
+
+Проведем анализ структурных сдвигов для tr3
+
+```{r}
+bp.tr3 <- breakpoints(chow$tr3~chow$t)
+breakpoints(bp.tr3)
+sctest(chow$tr3~chow$t, type="Chow", point=50)
+fs.tr3 <- Fstats(chow$tr3~chow$t)
+plot(fs.tr3) 
+```
+
+График tr4
+
+```{r}
+ggplot(chow, aes(x=t, y=tr4)) +  geom_line()
+```
+
+Проведем анализ структурных сдвигов для tr4
+
+```{r}
+chow<-chow%>% mutate(t2=t^2)
+bp.tr4 <- breakpoints(chow$tr4~chow$t2)
+breakpoints(bp.tr4)
+sctest(chow$tr4~chow$t2, type="Chow", point=60)
+fs.tr4 <- Fstats(chow$tr4~chow$t2)
+plot(fs.tr4)
+```
+
+Моделирование структурных сдвигов
+
+График tr1
+
+```{r}
+ggplot(chow, aes(x=t, y=tr1)) +  geom_line()
+```
+
+Построим и проведем анализ модели без фиктивной переменной
+
+```{r}
+model1=lm(tr1~t, data=chow) # без фиктивной переменной
+summary(model1)
+anova(model1)
+y1=fitted(model1)
+e1=residuals(model1)
+```
+
+Построим график линии тренда
+
+```{r}
+ggplot(chow) +
+  geom_line(aes(t, tr1), colour = 'grey', size = 2) +
+  geom_line(aes(t, y1), colour = 'red', size = 1)
+```
+
+Создадим фиктивную переменную для моделирования "скачка" (изменение констант)
+
+```{r}
+chow$t30 <- ifelse(chow$t<= 30, 1, 0)
+```
+
+Построим и проведем анализ модели с фиктивной переменной
+
+```{r}
+model2=lm(tr1~t+t30, data=chow) # с фиктивной переменной
+summary(model2)
+anova(model2)
+y2=fitted(model2)
+e2=residuals(model2)
+```
+
+Построим график линии тренда с учетом сдвига
+
+```{r}
+ggplot(chow) +
+  geom_line(aes(t, tr1), colour = 'grey', size = 2) +
+  geom_line(aes(t, y2), colour = 'red', size = 1)
+```
+
+График tr2
+
+```{r}
+ggplot(chow, aes(x=t, y=tr2)) +  geom_line()
+```
+
+Создадим фиктивную переменную для моделирования "скачка" и изменения угла наклона
+
+```{r}
+chow$t60 <- ifelse(chow$t<= 60, 1, 0)
+chow<-chow%>% mutate(tt60=t60*t) 
+```
+
+Построим и проведем анализ модели с учетом "скачка" и изменения угла наклона
+
+```{r}
+model3=lm(tr2~t+tt60, data=chow)
+summary(model3)
+anova(model3)
+y3=fitted(model3)
+e3=residuals(model3)
+```
+
+Построим график линии тренда с учетом структурных сдвигов
+
+```{r}
+ggplot(chow) +
+  geom_line(aes(t, tr2), colour = 'grey', size = 2) +
+  geom_line(aes(t, y3), colour = 'red', size = 1)
+```

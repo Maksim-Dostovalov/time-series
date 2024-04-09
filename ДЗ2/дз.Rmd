@@ -1,0 +1,116 @@
+---
+title: "Домашнее задание 2. Временной ряд: введение"
+author: "Николаева В.Н. Достовалов М.Ю."
+date: "30.01.2024"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+  pdf_document:
+    df_print: paged
+lang: ru-russian
+---
+
+```{r}
+# импорт данных
+library(dplyr)
+data <- readxl::read_excel("WB_Russia.xls", sheet = 'Лист1')
+
+# подготовка данных
+names <- data$`Indicator Code`
+data <- data %>% select(-1)
+data <- t(data)
+colnames(data) <- names
+data <- data.frame(data)
+```
+
+**Показатель: индекс Джинни**
+
+Индекс Джини - это статистический показатель, который используется для оценки экономического неравенства в обществе. Он может варьироваться от 0 до 1, где 0 соответствует полному равенству (все имеют одинаковый доход), а 1 - абсолютному неравенству (весь доход имеет один человек, а все остальные - нулевой).
+
+Наиболее часто в современных экономических расчётах в качестве изучаемого признака берётся уровень годового дохода. Коэффициент Джини можно определить как макроэкономический показатель, характеризующий дифференциацию денежных доходов населения в виде степени отклонения фактического распределения доходов от абсолютно равного их распределения между жителями страны.
+
+**Страна:** Российская Федерация
+
+**Период:** c 1997 по 2020 год
+
+```{r}
+index <- na.omit(data$SI.POV.GINI)
+
+# лаговые признаки
+lag_1 <- lag(index)
+lag_2 <- lag(index, 2)
+lag_3 <- lag(index, 3)
+lag_4 <- lag(index, 4)
+lag_5 <- lag(index, 5)
+
+# формулы расчёта показателей
+increment <- index - lag_1
+growth_rate <- increment / lag_1
+logarithmic_diff <- log(index) - log(lag_1)
+
+index_with_lags <- cbind(
+  index, 
+  lag_1, lag_2, lag_3, lag_4, lag_5, 
+  increment, growth_rate, logarithmic_diff
+  )
+round(index_with_lags, 3)
+```
+
+```{r}
+plot(ts(index, start = 1997), main = 'Индекс Джини', ylab = '%')
+```
+
+-   Видно, что в 2020 году (последний год, когда индекс публиковался), индекс принял самое низкое значение за всю историю наблюдений в РФ. Темп прироста его составил -4,6%, что говорит о том, что он стал ниже, чем в 2019 году на 4,6%.
+
+-   После 2000 года, индекс начал стремительно расти, к 2010 году индекс спустился до локального минимума, при этом оставшись довольно высоким. Затем, после роста в 2013 году начал стремительно падать.
+
+```{r}
+library(glue)
+
+mean_index <- mean(index)
+var_index <- var(index)
+len_index <- length(index)
+
+
+# рассчёт ACF
+dev_from_mean <- index_with_lags[, 'index'] - mean_index
+variance <- sum(dev_from_mean^2) / len_index
+
+acf_vector <- c()
+for (i in 1:5) {
+  lag_dev_from_mean <- index_with_lags[, glue('lag_{i}')] - mean_index
+  auto_cov <- sum((dev_from_mean * lag_dev_from_mean), na.rm = T) / (len_index - i)
+  auto_corr <- auto_cov / variance
+  acf_vector[i] <- auto_corr
+}
+
+acf_vector
+```
+
+Видно, что ACF постепенно убывает с увеличением лагов
+
+```{r}
+# рассчёт PACF
+pacf1 <- acf_vector[1]
+pacf2 <- (acf_vector[2] - acf_vector[1]^2) / (1 - acf_vector[1]^2)
+pacf3 <- (acf_vector[1]^3 + acf_vector[1] * acf_vector[2]^2 + acf_vector[3] - (acf_vector[1]^2) * acf_vector[3] - 2 * acf_vector[1] * acf_vector[2]) / (1 + 2 * (acf_vector[1]^2) * acf_vector[2] - acf_vector[2]^2 - 2 * acf_vector[1]^2)
+
+pacf_vector <- c(pacf1, pacf2, pacf3)
+
+pacf_vector
+```
+
+Видно, что высокое значение PACF принимает только в первом лаге, когда как на остальных лагах значения не такие высокие
+
+```{r}
+barplot(acf_vector, main = 'ACF', col = 'darkgreen', ylim = c(-1, 1))
+abline(h = 0)
+box()
+
+barplot(pacf_vector, main = 'PASF', col = 'steelblue', ylim = c(-1, 1))
+abline(h = 0)
+box()
+```
+
+Исходя из визуального анализа автокорреляционной функции (ACF) и частной автокорреляционной функции (PACF), можно сделать вывод, что измерения показателя индекса Джини могут соответствать авторегрессионной модели первого порядка AR(1).

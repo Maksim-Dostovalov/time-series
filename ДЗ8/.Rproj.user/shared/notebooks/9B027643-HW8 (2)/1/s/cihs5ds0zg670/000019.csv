@@ -1,0 +1,5 @@
+"0","data <- readxl::read_xls('WB_Russia.xls')"
+"0",""
+"0","population <- data$SP.POP.TOTL"
+"0","life_expectancy <- na.omit(data$SP.DYN.LE00.IN)"
+"0","emissions <- na.omit(data$EN.ATM.CO2E.PC)"

@@ -1,0 +1,42 @@
+#Занятие 2.
+library(haven)
+S2 <- read_dta("C:/1/R2023/S2.dta")
+View(S2)
+
+
+##автокорреляционная функция в R
+# лаг 1
+plot.ts(S2$wn)
+d1 <- data.frame(wn=S2$wn, L1wn=lag(S2$wn)) 
+view(d1)
+summary(d1)
+library(psych)
+describe(d1)
+cor(d1)
+cor(d1, use = "complete.obs") # исключили пропуски
+
+options(digits= 2) # выводить два знака после запятой
+cor(d1, use = "complete.obs")
+
+
+# лаг 1-4
+
+d1 <- data.frame(wn=S2$wn, L1wn=lag(S2$wn), L2wn=lag(d1$L1wn), L3wn=lag(d1$L2wn), L4wn=lag(d1$L3wn)) 
+view(d1)
+cor(d1, use = "complete.obs")
+remove(d1)
+
+#ACF/PACF белого шума
+acf(S2$wn)
+acf(S2$wn, lag.max=4, plot=FALSE)
+acf(S2$wn, 10, main="Белый шум", ylab="ACF(wn)")
+
+
+acf(S2$wn)
+acf(S2$wn, lag.max=10, type="partial", ylab="PACF(wn)")
+
+
+#Тест Льюинга Бокса
+Box.test(S2$wn, lag=10)
+Box.test(S2$wn,lag=10, type="Lj")
+

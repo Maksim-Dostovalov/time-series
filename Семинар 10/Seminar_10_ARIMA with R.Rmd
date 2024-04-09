@@ -1,0 +1,318 @@
+---
+title: "ARIMA-модели"
+author: "Достовалов М.Ю."
+date: "21.03.2024"
+output:
+  word_document: default
+  pdf_document:
+    df_print: paged
+  html_document:
+    df_print: paged
+lang: "ru-russian"
+---
+
+Установим необходимые пакеты и подгрузим библиотеки
+```{r message=FALSE, warning=FALSE}
+# install.packages('urca')
+# install.packages('aTSA')
+# install.packages('forecast')
+# install.packages('zoo')
+# install.packages('xts')
+# install.packages('pander')
+
+library(aTSA)
+library(urca)
+library(haven)
+library(stats)
+library(tseries)
+library(forecast)
+library(zoo) # временные ряды
+library(xts) # временные ряды
+library(pander) # красивые таблицы
+library(lmtest) # тесты
+library(car) # тесты
+library(ggplot2)
+```
+
+Задание 2. Анализ и моделирование демографических данных (Методология Бокса-Дженкинса)
+Исходные данные (Данные с сайта http://www.gks.ru):
+1. Коэффициент суммарной рождаемости в России (1990-2014 г.г.)
+2. Ожидаемая продолжительность жизни при рождении в Москве (мужчины, женщины).
+3. Ожидаемая продолжительность жизни при рождении в России (мужчины, женщины).
+Файл: TFR_LE.dta
+
+Загрузим данные из файла
+```{r}
+#file.choose()
+df <- read_dta('TFR_LE.dta') # укажите свой путь, где лежит файл
+```
+
+Идентификация модели
+
+Графический анализ ВР
+```{r}
+tsdisplay(df$TFR)
+```
+
+Тест Дики-Фуллера для исходного ряда
+```{r}
+summary(ur.df(df$TFR, type = c("trend")))
+summary(ur.df(df$TFR, type = c("drift")))
+```
+
+Тест KPSS (Квятковского-Филлипса-Шмидта-Шина) для исходного ряда
+```{r}
+stationary.test(df$TFR, method = "kpss")
+```
+Вывод: После добавления тренда процесс на уровне значимости 5% становится стационарным. Значит можно предположить, что это тренд-стационарный процесс
+
+Тест Дики-Фуллера для первой разности
+```{r}
+d_TFR = diff(df$TFR)
+summary(ur.df(d_TFR, type = c("drift")))
+```
+
+PP-тест Филлипса-Перрона для первой разности
+```{r}
+stationary.test(d_TFR, method = "pp")
+```
+Вывод: После взятия первой разности процесс не стал стационарным.
+
+Тест Дики-Фуллера для второй разности
+```{r}
+d2_TFR = diff(d_TFR)
+#summary(ur.df(d2_TFR, type = c("drift")))
+adf.test(d2_TFR)
+```
+Вывод: После взятия второй разности процес стал стационарным. Значит это разностно-стационарный процесс с порядком интегрируемости I(2)
+
+Оценивание и диагностика моделей
+
+ARIMA(2,1,0)
+```{r}
+m1 <- Arima(df$TFR, order=c(2,1,0))
+summary(m1)
+```
+
+Тестирование остатков модели ARIMA(2,1,0)
+```{r}
+e1 <- m1$residuals
+tsdisplay(e1)
+pander(shapiro.test(e1)) # Тест Шапиро-Уилка на нормальность остатков
+pander(Box.test(e1,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию
+```
+
+Прогнозирование по модели ARIMA(2,1,0)
+```{r}
+pred1=fitted(m1)
+ggplot(data=df, aes(year, TFR))+
+  geom_line(colour = 'blue')+
+  geom_line(aes(year, pred1), colour = 'red', size = 0.5)
+
+prognoz1 <- forecast(m1, h=6)
+plot(prognoz1)
+```
+
+ARIMA(2,2,0)
+```{r}
+m2 <- Arima(df$TFR, order=c(2,2,0))
+summary(m2)
+```
+
+Тестирование остатков модели ARIMA(2,2,0)
+```{r}
+e2 <- m2$residuals
+tsdisplay(e2)
+pander(shapiro.test(e2)) # Тест Шапиро-Уилка на нормальность остатков
+pander(Box.test(e2,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию
+```
+
+Прогнозирование по модели ARIMA(2,2,0)
+```{r}
+pred2=fitted(m2)
+ggplot(data=df, aes(year, TFR))+
+  geom_line(colour = 'blue')+
+  geom_line(aes(year, pred2), colour = 'red', size = 0.5)
+```
+
+ARIMA(1,0,0)+параболический тренд
+```{r}
+t2=df$t^2
+m4 <- Arima(df$TFR, order=c(1,0,0),include.drift=TRUE, xreg=t2)
+summary(m4)
+```
+
+Тестирование остатков модели ARIMA(1,0,0)+параболический тренд
+```{r}
+e4 <- m4$residuals
+tsdisplay(e4)
+pander(shapiro.test(e4)) # Тест Шапиро-Уилка на нормальность остатков
+pander(Box.test(e4,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию
+```
+
+Прогнозирование по модели ARIMA(1,0,0)+параболический тренд
+```{r}
+pred4=fitted(m4)
+ggplot(data=df, aes(year, TFR))+
+  geom_line(colour = 'blue')+
+  geom_line(aes(year, pred4), colour = 'red', size = 0.5)
+```
+
+Задание 3. Устранение автокорреляции в остатках. Ожидаемая продолжительность жизни при рождении в Москве (мужчины)
+
+Идентификация модели
+
+Графический анализ ВР
+```{r}
+tsdisplay(df$LE_M_m)
+```
+
+Тест Дики-Фуллера для исходного ряда
+```{r}
+summary(ur.df(df$LE_M_m, type = c("trend")))
+summary(ur.df(df$LE_M_m, type = c("drift")))
+```
+Вывод: После добавления тренда процесс на уровне значимости 5% становится стационарным. Значит можно предположить, что это тренд-стационарный процесс
+
+Тест Дики-Фуллера для первой разности
+```{r}
+d_LE_M_m = diff(df$LE_M_m)
+summary(ur.df(d_LE_M_m, type = c("drift")))
+```
+
+Оценивание и диагностика моделей
+
+ARIMA(1,1,0)
+```{r}
+m1 <- Arima(df$LE_M_m, order=c(1,1,0))
+summary(m1)
+```
+
+Тестирование остатков модели ARIMA(1,1,0)
+```{r}
+e1 <- m1$residuals
+tsdisplay(e1)
+pander(shapiro.test(e1)) # Тест Шапиро-Уилка на нормальность остатков
+pander(Box.test(e1,lag=1, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию
+pander(Box.test(e1,lag=3, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию
+```
+
+Прогнозирование по модели ARIMA(1,1,0)
+```{r}
+pred1=fitted(m1)
+ggplot(data=df, aes(year, LE_M_m))+
+  geom_line(colour = 'blue')+
+  geom_line(aes(year, pred1), colour = 'red', size = 0.5)
+
+prognoz1 <- forecast(m1, h=6)
+plot(prognoz1)
+```
+
+ARIMA(3,1,0)
+```{r}
+m2 <- Arima(df$LE_M_m, order=c(3,1,0))
+summary(m2)
+```
+
+Тестирование остатков модели ARIMA(3,1,0)
+```{r}
+e2 <- m2$residuals
+tsdisplay(e2)
+pander(shapiro.test(e2)) # Тест Шапиро-Уилка на нормальность остатков
+pander(Box.test(e2,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию
+```
+
+Прогнозирование по модели ARIMA(3,1,0)
+```{r}
+pred2=fitted(m2)
+ggplot(data=df, aes(year, LE_M_m))+
+  geom_line(colour = 'blue')+
+  geom_line(aes(year, pred2), colour = 'red', size = 0.5)
+
+prognoz2 <- forecast(m2, h=6)
+plot(prognoz2)
+```
+
+Задача 4. Оценивание ARIMA со структурным сдвигом
+Исходные данные: ОПЖ в США в период с 1900 по 1999
+Файл с данными: LE_USA.gdt
+Замечание. Необходимо учитывать структурный сдвиг 1918 года, связанный с эпидемией «Испанки».
+
+Загрузим данные из файла
+```{r}
+#file.choose()
+df <- read_dta('LE_USA.dta') # укажите свой путь, где лежит файл
+```
+
+Идентификация модели
+
+Графический анализ ВР
+```{r}
+tsdisplay(df$le_w)
+```
+
+Проведем тест Эндрюса-Зивота с учетом структурного сдвига 1-го типа (на константу)
+```{r}
+summary(ur.za(df$le_w, model = c("intercept")))
+```
+
+Проведем тест Эндрюса-Зивота для у4 с учетом структурного сдвига 2-го типа (на наклон)
+```{r}
+summary(ur.za(df$le_w, model = c("trend")))
+```
+
+Проведем тест Эндрюса-Зивота для у4 с учетом структурного сдвига 3-го типа (на константу и наклон)
+```{r}
+summary(ur.za(df$le_w, model = c("both")))
+```
+
+Тест Дики-Фуллера для исходного ряда
+```{r}
+summary(ur.df(df$le_w, type = c("trend")))
+summary(ur.df(df$le_w, type = c("drift")))
+```
+
+ARIMA(2,0,0)+дамми+тренд
+```{r}
+d19 <- c(rep(c(0), times=19), rep(c(1), times=81))
+m1 <- Arima(df$le_w, order=c(2,0,0), include.drift=TRUE, xreg=d19)
+summary(m1)
+```
+
+Тестирование остатков модели ARIMA(2,0,0)+дамми+тренд
+```{r}
+e1 <- m1$residuals
+tsdisplay(e1)
+pander(shapiro.test(e1)) # Тест Шапиро-Уилка на нормальность остатков
+pander(Box.test(e1,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию
+```
+
+Прогнозирование по модели ARIMA(2,0,0)+дамми+тренд
+```{r}
+pred1=fitted(m1)
+ggplot(data=df, aes(year, le_w))+
+  geom_line(colour = 'blue')+
+  geom_line(aes(year, pred1), colour = 'red', size = 0.5)
+```
+
+ARIMA(3,0,0)+дамми
+```{r}
+m2 <- Arima(df$le_w, order=c(3,0,0), xreg=d19)
+summary(m2)
+```
+
+Тестирование остатков модели ARIMA(3,0,0)+дамми
+```{r}
+e2 <- m1$residuals
+tsdisplay(e2)
+pander(shapiro.test(e2)) # Тест Шапиро-Уилка на нормальность остатков
+pander(Box.test(e2,lag=10, type="Lj")) # Тест Льюинга-Бокса на автокорреляцию
+```
+
+Прогнозирование по модели ARIMA(3,0,0)+дамми
+```{r}
+pred2=fitted(m2)
+ggplot(data=df, aes(year, le_w))+
+  geom_line(colour = 'blue')+
+  geom_line(aes(year, pred2), colour = 'red', size = 0.5)
+```

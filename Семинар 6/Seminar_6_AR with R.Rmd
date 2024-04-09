@@ -1,0 +1,83 @@
+---
+title: "Исследование свойств стационарных процессов: AR-процессы"
+author: "Достовалов М.Ю."
+date: "22.02.2024"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    df_print: paged
+lang: ru-russian
+---
+
+1. Идентификация и анализ свойств AR-процессов. (по сгенерированным данным).
+
+Установим необходимые пакеты и подгрузим библиотеки
+```{r message=FALSE, warning=FALSE}
+library(haven)
+library(stats)
+```
+Задание 1. Идентификация и анализ свойств AR-процессов в R. Файл: AR.dta.
+
+Загрузим данные из файла
+```{r}
+#file.choose()
+AR=read_dta("AR.dta") # укажите свой путь, где лежит файл
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса Y1
+```{r}
+plot.ts(AR$Y1, xlab="t")
+acf(AR$Y1, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(AR$Y1, plot=TRUE)
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса Y2
+```{r}
+plot.ts(AR$Y2, xlab="t")
+acf(AR$Y2, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(AR$Y2, plot=TRUE)
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса Y3
+```{r}
+plot.ts(AR$Y3, xlab="t")
+acf(AR$Y3, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(AR$Y3, plot=TRUE)
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса Y4
+```{r}
+plot.ts(AR$Y4, xlab="t")
+acf(AR$Y4, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(AR$Y4, plot=TRUE)
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса Y5
+```{r}
+plot.ts(AR$Y5, xlab="t")
+acf(AR$Y5, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(AR$Y5, plot=TRUE)
+```
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса Y6
+```{r}
+plot.ts(AR$Y6, xlab="t")
+acf(AR$Y6, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(AR$Y6, na.action = na.pass, plot=TRUE)
+```
+
+Задание 2. Идентификация процесса: Анализ младенческой смертности. Файл: AR.dta.
+
+Загрузим данные из файла
+```{r}
+#file.choose()
+Mortality=read_dta("Mortality.dta") # укажите свой путь, где лежит файл
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для младенческой смертности
+```{r}
+plot.ts(Mortality$v2, xlab="t")
+acf(Mortality$v2, plot=TRUE, ci.type = "ma")
+pacf(Mortality$v2, plot=TRUE)
+```
+

@@ -1,0 +1,61 @@
+---
+title: "ARMA–процессы: свойства и идентификация"
+author: "Емелина Н.К."
+date: "07.03.2024"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    df_print: paged
+lang: ru-russian
+---
+
+1. Идентификация ARМА-процессов и анализ их характеристик. (по сгенерированным данным).
+
+Установим необходимые пакеты и подгрузим библиотеки
+```{r message=FALSE, warning=FALSE}
+library(haven)
+library(stats)
+```
+Задание 1. Идентификация и анализ свойств ARMA-процессов в R. Файл: ARМА2.dta
+
+Загрузим данные из файла
+```{r}
+#file.choose()
+ARMA=read_dta("ARMA2.dta") # укажите свой путь, где лежит файл
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса y1
+```{r}
+plot.ts(ARMA$y1, xlab="t")
+acf(ARMA$y1, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(ARMA$y1, plot=TRUE)
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса y2
+```{r}
+plot.ts(ARMA$y2, xlab="t")
+acf(ARMA$y2, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(ARMA$y2, na.action = na.pass, plot=TRUE)
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса y3
+```{r}
+plot.ts(ARMA$y3, xlab="t")
+acf(ARMA$y3, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(ARMA$y3, na.action = na.pass, plot=TRUE)
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса y4
+```{r}
+plot.ts(ARMA$y4, xlab="t")
+acf(ARMA$y4, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(ARMA$y4, na.action = na.pass, plot=TRUE)
+```
+
+Построим графики исходного временного ряда, автокорреляционной и частной автокорреляционной функций для процесса y5
+```{r}
+plot.ts(ARMA$y5, xlab="t")
+acf(ARMA$y5, na.action = na.pass, plot=TRUE, ci.type = "ma")
+pacf(ARMA$y5, na.action = na.pass, plot=TRUE)
+```

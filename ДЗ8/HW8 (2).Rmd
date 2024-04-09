@@ -1,0 +1,142 @@
+---
+title: "ТДЗ8. Тесты единичного корня"
+author: "Николаева В.Н. Достовалов М.Ю."
+date: "28 03 2024"
+output:
+  word_document: default
+  pdf_document:
+    df_print: paged
+  html_document:
+    df_print: paged
+lang: ru-russian
+---
+
+```{r message=FALSE, warning=FALSE}
+library(openxlsx)
+library(aTSA)
+library(urca)
+library(haven)
+library(stats)
+library(tseries)
+library(forecast)
+library(zoo)
+library(xts)
+library(pander)
+library(lmtest)
+library(car)
+library(ggplot2)
+```
+
+```{r}
+data <- readxl::read_xls('WB_Russia.xls')
+
+population <- data$SP.POP.TOTL
+life_expectancy <- na.omit(data$SP.DYN.LE00.IN)
+emissions <- na.omit(data$EN.ATM.CO2E.PC)
+```
+
+Выбранные показатели:
+SP.POP.TOTL: Численность населения, общая
+SP.DYN.LE00.IN: Ожидаемая продолжительность жизни при рождении, общая (в годах)
+EN.ATM.CO2E.PC: Выбросы CO2 (в метрических тоннах на душу населения)
+
+```{r}
+tsdisplay(population)
+tsdisplay(life_expectancy)
+tsdisplay(emissions)
+```
+Тест Дики-Фуллера для исходного ряда
+```{r}
+stationary.test(population, method = "adf")
+```
+```{r}
+stationary.test(life_expectancy, method = "adf")
+```
+
+```{r}
+stationary.test(emissions, method = "adf")
+```
+
+Тест KPSS (Квятковского-Филлипса-Шмидта-Шина) для исходного ряда
+```{r}
+stationary.test(population, method = "kpss")
+```
+
+```{r}
+stationary.test(life_expectancy, method = "kpss")
+```
+
+```{r}
+stationary.test(emissions, method = "kpss")
+```
+
+PP-тест Филлипса-Перрона для исходного ряда
+```{r}
+stationary.test(population, method = "pp")
+```
+
+```{r}
+stationary.test(life_expectancy, method = "pp")
+```
+
+```{r}
+stationary.test(emissions, method = "pp")
+```
+
+Тест Дики-Фуллера для первой разности
+```{r}
+population_diff = diff(population)
+stationary.test(population_diff, method = "adf")
+```
+
+```{r}
+life_expectancy_diff = diff(life_expectancy)
+stationary.test(life_expectancy_diff, method = "adf")
+```
+
+```{r}
+emissions_diff = diff(emissions)
+stationary.test(emissions_diff, method = "adf")
+```
+
+Тест KPSS (Квятковского-Филлипса-Шмидта-Шина) для первой разницы
+
+```{r}
+stationary.test(population_diff, method = "kpss")
+```
+
+```{r}
+stationary.test(life_expectancy_diff, method = "kpss")
+```
+
+```{r}
+stationary.test(emissions_diff, method = "kpss")
+```
+
+PP-тест Филлипса-Перрона для первой разницы
+
+```{r}
+stationary.test(population_diff, method = "pp")
+```
+
+```{r}
+stationary.test(life_expectancy_diff, method = "pp")
+```
+
+```{r}
+stationary.test(emissions_diff, method = "pp")
+```
+
+
+
+```{r}
+summary(ur.za(population, model = c("trend")))
+```
+
+
+```{r}
+stationary.test(life_expectancy, method = "adf")
+stationary.test(life_expectancy_diff, method = "adf")
+```
+
+

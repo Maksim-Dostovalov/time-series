@@ -1,0 +1,19 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(data.table)
+library(readxl)
+```
+
+
+```{r}
+df <- read_xls('WB_Russia.xls')
+```
+
+
+```{r}
+df[""]
+```

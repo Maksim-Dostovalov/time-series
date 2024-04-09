@@ -1,0 +1,1195 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Тесты единичного корня. Расширенный тест Дики-Фуллера},
+  pdfauthor={Достовалов М.Ю.},
+  pdflang={ru-russian},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Тесты единичного корня. Расширенный тест Дики-Фуллера}
+\author{Достовалов М.Ю.}
+\date{07.03.2024}
+
+\begin{document}
+\maketitle
+
+Установим необходимые пакеты и подгрузим библиотеки
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages(\textquotesingle{}urca\textquotesingle{})}
+\CommentTok{\# install.packages(\textquotesingle{}aTSA\textquotesingle{})}
+
+\FunctionTok{library}\NormalTok{(aTSA)}
+\FunctionTok{library}\NormalTok{(urca)}
+\FunctionTok{library}\NormalTok{(haven)}
+\FunctionTok{library}\NormalTok{(stats)}
+\FunctionTok{library}\NormalTok{(tseries)}
+\end{Highlighting}
+\end{Shaded}
+
+Задание 1. Даны случайные процессы у1, у2, у3, y4, у21. Файл: DF.dta.
+Cформулируйте и проверьте гипотезу о наличие единичного корня. Запишите
+тестируемую регрессию в критерии Дики-Фуллера для y1 .
+
+Загрузим данные из файла
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#file.choose()}
+\NormalTok{DF}\OtherTok{=}\FunctionTok{read\_dta}\NormalTok{(}\StringTok{"DF.dta"}\NormalTok{) }\CommentTok{\# укажите свой путь, где лежит файл}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Построим графики исходного временного ряда для процесса y1
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot.ts}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1, }\AttributeTok{xlab=}\StringTok{"t"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Seminar_8_DF-test-with-R_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+Проведем тест Дики-Фуллера (с константой) для у1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"drift"}\NormalTok{), }\AttributeTok{lags =} \DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.0004 -0.7543 -0.1044  0.5796  3.2531 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.09254    0.10837  -0.854    0.395    
+## z.lag.1     -0.93032    0.10348  -8.990 2.03e-14 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.07 on 97 degrees of freedom
+## Multiple R-squared:  0.4545, Adjusted R-squared:  0.4489 
+## F-statistic: 80.83 on 1 and 97 DF,  p-value: 2.027e-14
+## 
+## 
+## Value of test-statistic is: -8.9905 40.4569 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.51 -2.89 -2.58
+## phi1  6.70  4.71  3.86
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (с константой и с трендом) для у1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"trend"}\NormalTok{), }\AttributeTok{lags =} \DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.9884 -0.6923 -0.1177  0.6070  3.1228 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.278886   0.218630  -1.276    0.205    
+## z.lag.1     -0.938652   0.103846  -9.039 1.73e-14 ***
+## tt           0.003705   0.003775   0.981    0.329    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.07 on 96 degrees of freedom
+## Multiple R-squared:  0.4599, Adjusted R-squared:  0.4487 
+## F-statistic: 40.88 on 2 and 96 DF,  p-value: 1.435e-13
+## 
+## 
+## Value of test-statistic is: -9.0389 27.2821 40.8806 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -4.04 -3.45 -3.15
+## phi2  6.50  4.88  4.16
+## phi3  8.73  6.49  5.47
+\end{verbatim}
+
+Проведем расширенный тест Дики-Фуллера (с 1 дополнительным лагом) для у1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"drift"}\NormalTok{), }\AttributeTok{lags =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.0503 -0.7865 -0.1247  0.5915  3.2679 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.08384    0.11051  -0.759    0.450    
+## z.lag.1     -0.88443    0.14258  -6.203 1.44e-08 ***
+## z.diff.lag  -0.05180    0.10473  -0.495    0.622    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.079 on 95 degrees of freedom
+## Multiple R-squared:  0.4557, Adjusted R-squared:  0.4442 
+## F-statistic: 39.76 on 2 and 95 DF,  p-value: 2.841e-13
+## 
+## 
+## Value of test-statistic is: -6.2028 19.2736 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.51 -2.89 -2.58
+## phi1  6.70  4.71  3.86
+\end{verbatim}
+
+Проведем расширенный тест Дики-Фуллера (с 2 дополнительными лагами) для
+у1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"drift"}\NormalTok{), }\AttributeTok{lags =} \DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.1837 -0.7007 -0.1126  0.5773  3.0469 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.10777    0.11171  -0.965    0.337    
+## z.lag.1     -1.02493    0.17205  -5.957 4.54e-08 ***
+## z.diff.lag1  0.09168    0.14328   0.640    0.524    
+## z.diff.lag2  0.15794    0.10602   1.490    0.140    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.077 on 93 degrees of freedom
+## Multiple R-squared:  0.468,  Adjusted R-squared:  0.4509 
+## F-statistic: 27.27 on 3 and 93 DF,  p-value: 9.623e-13
+## 
+## 
+## Value of test-statistic is: -5.9573 17.7741 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.51 -2.89 -2.58
+## phi1  6.70  4.71  3.86
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (с оптимальным количеством лагов) для у1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"drift"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.0503 -0.7865 -0.1247  0.5915  3.2679 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.08384    0.11051  -0.759    0.450    
+## z.lag.1     -0.88443    0.14258  -6.203 1.44e-08 ***
+## z.diff.lag  -0.05180    0.10473  -0.495    0.622    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.079 on 95 degrees of freedom
+## Multiple R-squared:  0.4557, Adjusted R-squared:  0.4442 
+## F-statistic: 39.76 on 2 and 95 DF,  p-value: 2.841e-13
+## 
+## 
+## Value of test-statistic is: -6.2028 19.2736 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.51 -2.89 -2.58
+## phi1  6.70  4.71  3.86
+\end{verbatim}
+
+Задание 2. Разностно-стационарные ряды. Исследуйте y2 и y21. Используйте
+тест Дики-Фуллера для первой разности изучаемых процессов (в случае
+необходимости). Сделайте вывод о порядке интегрируемости процессов
+(после какой разности процесс стал стационарным).
+
+Построим графики исходного временного ряда для процесса y2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot.ts}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y2, }\AttributeTok{xlab=}\StringTok{"t"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Seminar_8_DF-test-with-R_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+Проведем тест Дики-Фуллера (с константой и с трендом) для у2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y2, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"trend"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.91983 -0.69289 -0.09198  0.66596  3.05289 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)
+## (Intercept) -0.208187   0.241721  -0.861    0.391
+## z.lag.1     -0.028729   0.038461  -0.747    0.457
+## tt          -0.002847   0.009517  -0.299    0.765
+## z.diff.lag   0.080654   0.108164   0.746    0.458
+## 
+## Residual standard error: 1.078 on 94 degrees of freedom
+## Multiple R-squared:  0.01953,    Adjusted R-squared:  -0.01176 
+## F-statistic: 0.6242 on 3 and 94 DF,  p-value: 0.6011
+## 
+## 
+## Value of test-statistic is: -0.7469 0.7096 0.7267 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -4.04 -3.45 -3.15
+## phi2  6.50  4.88  4.16
+## phi3  8.73  6.49  5.47
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (с константой и без тренда) для у2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y2, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"drift"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.9243 -0.6817 -0.1260  0.6465  3.0627 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)
+## (Intercept) -0.25652    0.17893  -1.434    0.155
+## z.lag.1     -0.01821    0.01552  -1.174    0.244
+## z.diff.lag   0.07250    0.10417   0.696    0.488
+## 
+## Residual standard error: 1.073 on 95 degrees of freedom
+## Multiple R-squared:  0.0186, Adjusted R-squared:  -0.002063 
+## F-statistic: 0.9002 on 2 and 95 DF,  p-value: 0.4099
+## 
+## 
+## Value of test-statistic is: -1.1735 1.0295 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.51 -2.89 -2.58
+## phi1  6.70  4.71  3.86
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (без константы и тренда) для у2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y2, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"none"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.1087 -0.8478 -0.1844  0.5008  3.1353 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)
+## z.lag.1    -0.0005812  0.0095163  -0.061    0.951
+## z.diff.lag  0.0787237  0.1046476   0.752    0.454
+## 
+## Residual standard error: 1.079 on 96 degrees of freedom
+## Multiple R-squared:  0.005869,   Adjusted R-squared:  -0.01484 
+## F-statistic: 0.2834 on 2 and 96 DF,  p-value: 0.7539
+## 
+## 
+## Value of test-statistic is: -0.0611 
+## 
+## Critical values for test statistics: 
+##      1pct  5pct 10pct
+## tau1 -2.6 -1.95 -1.61
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (с константой и трендом) для первой разности
+у2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d\_y2 }\OtherTok{=} \FunctionTok{diff}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y2)}
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(d\_y2, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"trend"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.0114 -0.7226 -0.1792  0.5872  3.1354 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.277115   0.228409  -1.213    0.228    
+## z.lag.1     -0.895190   0.144404  -6.199 1.54e-08 ***
+## tt           0.003784   0.003952   0.957    0.341    
+## z.diff.lag  -0.046562   0.105865  -0.440    0.661    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.085 on 93 degrees of freedom
+## Multiple R-squared:  0.4607, Adjusted R-squared:  0.4433 
+## F-statistic: 26.48 on 3 and 93 DF,  p-value: 1.812e-12
+## 
+## 
+## Value of test-statistic is: -6.1992 12.8663 19.2804 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -4.04 -3.45 -3.15
+## phi2  6.50  4.88  4.16
+## phi3  8.73  6.49  5.47
+\end{verbatim}
+
+Вывод: После взятия первой разности процес у2 стал стационарным. Значит
+это разностно-стационарный процесс с порядком интегрируемости I(1)
+
+Построим графики исходного временного ряда для процесса y21
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot.ts}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y21, }\AttributeTok{xlab=}\StringTok{"t"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Seminar_8_DF-test-with-R_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+Проведем тест Дики-Фуллера (с константой и с трендом) для у21
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y21, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"trend"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.43502 -0.51917  0.04679  0.62525  2.27102 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.207570   0.258902   0.802  0.42473    
+## z.lag.1     -0.005736   0.002043  -2.807  0.00608 ** 
+## tt           0.017583   0.008077   2.177  0.03199 *  
+## z.diff.lag   0.982751   0.031869  30.837  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.8853 on 94 degrees of freedom
+## Multiple R-squared:  0.9396, Adjusted R-squared:  0.9377 
+## F-statistic: 487.6 on 3 and 94 DF,  p-value: < 2.2e-16
+## 
+## 
+## Value of test-statistic is: -2.8072 2.965 4.147 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -4.04 -3.45 -3.15
+## phi2  6.50  4.88  4.16
+## phi3  8.73  6.49  5.47
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (с константой и без тренда) для у21
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y21, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"drift"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.45757 -0.54107  0.07336  0.64461  2.05510 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.4661693  0.2345236   1.988   0.0497 *  
+## z.lag.1     -0.0018082  0.0009777  -1.849   0.0675 .  
+## z.diff.lag   0.9471763  0.0278938  33.957   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9025 on 95 degrees of freedom
+## Multiple R-squared:  0.9366, Adjusted R-squared:  0.9352 
+## F-statistic: 701.4 on 2 and 95 DF,  p-value: < 2.2e-16
+## 
+## 
+## Value of test-statistic is: -1.8495 1.9994 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.51 -2.89 -2.58
+## phi1  6.70  4.71  3.86
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (без константы и тренда) для у21
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y21, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"none"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.52097 -0.50711  0.07007  0.73891  2.01159 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## z.lag.1    -0.0001024  0.0004756  -0.215     0.83    
+## z.diff.lag  0.9798935  0.0228634  42.859   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9163 on 96 degrees of freedom
+## Multiple R-squared:  0.9565, Adjusted R-squared:  0.9556 
+## F-statistic:  1056 on 2 and 96 DF,  p-value: < 2.2e-16
+## 
+## 
+## Value of test-statistic is: -0.2153 
+## 
+## Critical values for test statistics: 
+##      1pct  5pct 10pct
+## tau1 -2.6 -1.95 -1.61
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (с константой и трендом) для первой разности
+у21
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d\_y21 }\OtherTok{=} \FunctionTok{diff}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y21)}
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(d\_y21, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"trend"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.57348 -0.54990  0.05764  0.73923  1.84196 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)
+## (Intercept)  0.295471   0.273926   1.079    0.284
+## z.lag.1     -0.050028   0.032212  -1.553    0.124
+## tt          -0.003246   0.004046  -0.802    0.424
+## z.diff.lag   0.075795   0.103728   0.731    0.467
+## 
+## Residual standard error: 0.9218 on 93 degrees of freedom
+## Multiple R-squared:  0.02782,    Adjusted R-squared:  -0.003537 
+## F-statistic: 0.8872 on 3 and 93 DF,  p-value: 0.4508
+## 
+## 
+## Value of test-statistic is: -1.5531 0.808 1.2099 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -4.04 -3.45 -3.15
+## phi2  6.50  4.88  4.16
+## phi3  8.73  6.49  5.47
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (с константой и трендом) для второй разности
+у21
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d2\_y21 }\OtherTok{=} \FunctionTok{diff}\NormalTok{(d\_y21)}
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(d2\_y21, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"trend"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.61954 -0.48001 -0.01269  0.67643  1.96672 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.0297342  0.1950024   0.152    0.879    
+## z.lag.1     -0.9200948  0.1438528  -6.396 6.54e-09 ***
+## tt          -0.0002792  0.0034376  -0.081    0.935    
+## z.diff.lag  -0.0367042  0.1041295  -0.352    0.725    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9333 on 92 degrees of freedom
+## Multiple R-squared:  0.4794, Adjusted R-squared:  0.4624 
+## F-statistic: 28.24 on 3 and 92 DF,  p-value: 4.936e-13
+## 
+## 
+## Value of test-statistic is: -6.3961 13.6567 20.4551 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -4.04 -3.45 -3.15
+## phi2  6.50  4.88  4.16
+## phi3  8.73  6.49  5.47
+\end{verbatim}
+
+Вывод: После взятия второй разности процес у2 стал стационарным. Значит
+это разностно-стационарный процесс с порядком интегрируемости I(2)
+
+Задание 3. Тренд-стационарный ряд. Исследуйте y3. Предположив наличие в
+процессах детерминированного тренда, проведите тест Дики-Фуллера.
+Сделайте вывод.
+
+Построим графики исходного временного ряда для процесса y3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot.ts}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y3, }\AttributeTok{xlab=}\StringTok{"t"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Seminar_8_DF-test-with-R_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+Проведем тест Дики-Фуллера (с константой и без тренда) для у3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y3, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"drift"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.3178 -0.8977  0.1058  0.9004  2.4986 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.826496   0.263321  -3.139  0.00226 ** 
+## z.lag.1     -0.004451   0.009163  -0.486  0.62828    
+## z.diff.lag  -0.489941   0.091231  -5.370 5.57e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.277 on 95 degrees of freedom
+## Multiple R-squared:  0.2371, Adjusted R-squared:  0.221 
+## F-statistic: 14.76 on 2 and 95 DF,  p-value: 2.612e-06
+## 
+## 
+## Value of test-statistic is: -0.4857 13.8863 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.51 -2.89 -2.58
+## phi1  6.70  4.71  3.86
+\end{verbatim}
+
+Проведем тест Дики-Фуллера (c константой и трендом) для у3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y3, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"trend"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.0159 -0.7115 -0.1722  0.5739  3.1416 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.33601    0.23612  -1.423    0.158    
+## z.lag.1     -0.89838    0.14355  -6.259 1.15e-08 ***
+## tt          -0.44567    0.07146  -6.237 1.27e-08 ***
+## z.diff.lag  -0.04391    0.10519  -0.417    0.677    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.08 on 94 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.4432 
+## F-statistic: 26.73 on 3 and 94 DF,  p-value: 1.37e-12
+## 
+## 
+## Value of test-statistic is: -6.2585 25.9154 19.6126 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -4.04 -3.45 -3.15
+## phi2  6.50  4.88  4.16
+## phi3  8.73  6.49  5.47
+\end{verbatim}
+
+Вывод: Так как после добавления в модель тренда процесс стал
+стационарным, то это тренд-стационарный процесс.
+
+Задание 4. Альтернативные тесты единичного корня. Проведите PP- и
+KPSS-тесты для y1, сравните результаты.
+
+Проведем тест Дики-Фуллера для у1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{adf.test}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in adf.test(DF$y1): p-value smaller than printed p-value
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  DF$y1
+## Dickey-Fuller = -4.3072, Lag order = 4, p-value = 0.01
+## alternative hypothesis: stationary
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#stationary.test(DF$y1, method = "adf")}
+\end{Highlighting}
+\end{Shaded}
+
+Проведем PP-тест Филлипса-Перрона для у1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pp.test}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in pp.test(DF$y1): p-value smaller than printed p-value
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  Phillips-Perron Unit Root Test
+## 
+## data:  DF$y1
+## Dickey-Fuller Z(alpha) = -91.416, Truncation lag parameter = 3, p-value
+## = 0.01
+## alternative hypothesis: stationary
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{stationary.test}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1, }\AttributeTok{method =} \StringTok{"pp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Phillips-Perron Unit Root Test 
+## alternative: stationary 
+##  
+## Type 1: no drift no trend 
+##  lag Z_rho p.value
+##    3 -90.3    0.01
+## ----- 
+##  Type 2: with drift no trend 
+##  lag Z_rho p.value
+##    3 -90.9    0.01
+## ----- 
+##  Type 3: with drift and trend 
+##  lag Z_rho p.value
+##    3 -91.4    0.01
+## --------------- 
+## Note: p-value = 0.01 means p.value <= 0.01
+\end{verbatim}
+
+Проведем тест KPSS (Квятковского-Филлипса-Шмидта-Шина) для у1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kpss.test}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in kpss.test(DF$y1): p-value greater than printed p-value
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  KPSS Test for Level Stationarity
+## 
+## data:  DF$y1
+## KPSS Level = 0.26643, Truncation lag parameter = 4, p-value = 0.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#stationary.test(DF$y1, method = "kpss")}
+\end{Highlighting}
+\end{Shaded}
+
+Задание 5. Тесты единичного корня с учетом структурного сдвига.
+Проведите тесты единичного корня для у4, в предположении наличия
+структурного сдвига. Сделайте выводы.
+
+Построим графики исходного временного ряда для процесса y4
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot.ts}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y4, }\AttributeTok{xlab=}\StringTok{"t"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Seminar_8_DF-test-with-R_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+Проведем тест Эндрюса-Зивота для у4 с учетом структурного сдвига 1-го
+типа (на константу)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.za}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y4, }\AttributeTok{model =} \FunctionTok{c}\NormalTok{(}\StringTok{"intercept"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ################################ 
+## # Zivot-Andrews Unit Root Test # 
+## ################################ 
+## 
+## 
+## Call:
+## lm(formula = testmat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.77807 -0.71987 -0.03273  0.54846  2.68554 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.04168    0.19747  -0.211    0.833    
+## y.l1        -0.01270    0.06879  -0.185    0.854    
+## trend        0.21409    0.01640  13.054   <2e-16 ***
+## du           9.30655    0.66847  13.922   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9396 on 95 degrees of freedom
+##   (1 пропущенное наблюдение удалено)
+## Multiple R-squared:  0.9911, Adjusted R-squared:  0.9908 
+## F-statistic:  3507 on 3 and 95 DF,  p-value: < 2.2e-16
+## 
+## 
+## Teststatistic: -14.7224 
+## Critical values: 0.01= -5.34 0.05= -4.8 0.1= -4.58 
+## 
+## Potential break point at position: 30
+\end{verbatim}
+
+Проведем тест Эндрюса-Зивота для у4 с учетом структурного сдвига 2-го
+типа (на наклон)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.za}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y4, }\AttributeTok{model =} \FunctionTok{c}\NormalTok{(}\StringTok{"trend"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ################################ 
+## # Zivot-Andrews Unit Root Test # 
+## ################################ 
+## 
+## 
+## Call:
+## lm(formula = testmat)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.9976 -0.7741  0.0401  0.7352  7.3375 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -1.13600    0.57375  -1.980 0.050600 .  
+## y.l1         0.62055    0.07965   7.791 8.29e-12 ***
+## trend        0.19202    0.04334   4.430 2.52e-05 ***
+## dt          -0.11098    0.03190  -3.479 0.000762 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.543 on 95 degrees of freedom
+##   (1 пропущенное наблюдение удалено)
+## Multiple R-squared:  0.9759, Adjusted R-squared:  0.9751 
+## F-statistic:  1280 on 3 and 95 DF,  p-value: < 2.2e-16
+## 
+## 
+## Teststatistic: -4.7637 
+## Critical values: 0.01= -4.93 0.05= -4.42 0.1= -4.11 
+## 
+## Potential break point at position: 42
+\end{verbatim}
+
+Проведем тест Эндрюса-Зивота для у4 с учетом структурного сдвига 3-го
+типа (на константу и наклон)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.za}\NormalTok{(DF}\SpecialCharTok{$}\NormalTok{y4, }\AttributeTok{model =} \FunctionTok{c}\NormalTok{(}\StringTok{"both"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ################################ 
+## # Zivot-Andrews Unit Root Test # 
+## ################################ 
+## 
+## 
+## Call:
+## lm(formula = testmat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.77535 -0.73794 -0.06437  0.50821  2.55813 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.11509    0.37947   0.303    0.762    
+## y.l1        -0.01288    0.06907  -0.187    0.852    
+## trend        0.20433    0.02602   7.852 6.52e-12 ***
+## du           9.42061    0.71126  13.245  < 2e-16 ***
+## dt           0.01050    0.02167   0.485    0.629    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9434 on 94 degrees of freedom
+##   (1 пропущенное наблюдение удалено)
+## Multiple R-squared:  0.9911, Adjusted R-squared:  0.9907 
+## F-statistic:  2609 on 4 and 94 DF,  p-value: < 2.2e-16
+## 
+## 
+## Teststatistic: -14.6654 
+## Critical values: 0.01= -5.57 0.05= -5.08 0.1= -4.82 
+## 
+## Potential break point at position: 30
+\end{verbatim}
+
+\end{document}
